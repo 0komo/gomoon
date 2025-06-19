@@ -1,0 +1,7 @@
+[language-server.gopls.config]
+directoryFilters = [ "+undefined", "+lua54", "+lua53", "+lua52", "+lua51" ]
+buildFlags = ["-tags", "gomoon-static"]
+
+[[languages]]
+name = "c"
+language-servers = ["clangd"]

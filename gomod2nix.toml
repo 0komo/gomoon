@@ -1,0 +1,39 @@
+schema = 3
+
+[mod]
+  [mod."github.com/go-logr/logr"]
+    version = "v1.4.2"
+    hash = "sha256-/W6qGilFlZNTb9Uq48xGZ4IbsVeSwJiAMLw4wiNYHLI="
+  [mod."github.com/go-task/slim-sprig/v3"]
+    version = "v3.0.0"
+    hash = "sha256-vCCw4MXVBm33VNLXcOBccVDD1CSnzDvDdWB6w5FN1cA="
+  [mod."github.com/google/go-cmp"]
+    version = "v0.7.0"
+    hash = "sha256-JbxZFBFGCh/Rj5XZ1vG94V2x7c18L8XKB0N9ZD5F2rM="
+  [mod."github.com/google/pprof"]
+    version = "v0.0.0-20250403155104-27863c87afa6"
+    hash = "sha256-6dezHRvyMOT/3I5SzKcvXGsbeZ27YIBmjnAKd5+Hijc="
+  [mod."github.com/onsi/ginkgo/v2"]
+    version = "v2.23.4"
+    hash = "sha256-AVq5cBqBhja/BMSMHqeLkXjmYV8+ddTRthiGWt28c38="
+  [mod."github.com/onsi/gomega"]
+    version = "v1.37.0"
+    hash = "sha256-PfHFYp365MwBo+CUZs+mN5QEk3Kqe9xrBX+twWfIc9o="
+  [mod."go.uber.org/automaxprocs"]
+    version = "v1.6.0"
+    hash = "sha256-a/Agm+kM9x+VRo0CYyTL3ipUYv9Glrc4NeGSZJdpobA="
+  [mod."golang.org/x/net"]
+    version = "v0.37.0"
+    hash = "sha256-sZKbJISVdBwyuYRQgrraTKxeIORWlzK5hScceQ2dE58="
+  [mod."golang.org/x/sys"]
+    version = "v0.32.0"
+    hash = "sha256-c9RRnyKQy9Kl8hpbtcgkm1O5H7gOdk9Rv925F8fZS6E="
+  [mod."golang.org/x/text"]
+    version = "v0.23.0"
+    hash = "sha256-TiYX1K4DYpP1dEV06whOm43xyOntjrPFi+VAdncoeCY="
+  [mod."golang.org/x/tools"]
+    version = "v0.31.0"
+    hash = "sha256-NXyG75xnCUX4EpW0Jmm1qpPbwhaiMxgJqvCU1X5oGyk="
+  [mod."gopkg.in/yaml.v3"]
+    version = "v3.0.1"
+    hash = "sha256-FqL9TKYJ0XkNwJFnq9j0VvJ5ZUU1RvH/52h/f5bkYAU="
