@@ -1,14 +1,15 @@
 #ifndef GOMOON_UTILS_H
 #define GOMOON_UTILS_H
 
-#ifdef GOMOON_STATIC
+#ifdef _LUA_STATIC
 #include "minilua.h"
-#else // GOMOON_STATIC
+#else // _LUA_STATIC
 #include <lauxlib.h>
 #include <lua.h>
 #include <lualib.h>
-#endif // GOMOON_STATIC
+#endif // _LUA_STATIC
 
-inline lua_State *cluaL_newstate() { return luaL_newstate(); }
+extern void *allocFnHandler(void *, void *, size_t, size_t);
+extern int goFuncHandler(lua_State *);
 
 #endif // GOMOON_UTILS_H

@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestLua54(t *testing.T) {
+func TestGomoon(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Lua54 Suite")
+	RunSpecs(t, "Gomoon Suite")
 }
