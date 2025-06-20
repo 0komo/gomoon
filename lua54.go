@@ -19,7 +19,5 @@ import "C"
 const luaVersion = "5.4"
 
 func (L *State) OpenUtf8lib() int {
-	L.mu.Lock()
-	defer L.mu.Unlock()
 	return int(C.luaopen_utf8(L.s))
 }

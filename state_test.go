@@ -22,7 +22,7 @@ Describe("State", Ordered, func() {
 		})
 
 		It("with custom alloc fn is successful", func() {
-			L := moon.NewStateWithAllocFn(func(_, ptr unsafe.Pointer, _, nsize uintptr) unsafe.Pointer {
+			L := moon.NewStateWithAllocFn(func(ptr unsafe.Pointer, _, nsize uintptr) unsafe.Pointer {
 				if nsize == 0 {
 					tests.Free(ptr)
 					return nil
@@ -58,5 +58,15 @@ Describe("State", Ordered, func() {
 		str, ok := L.ToString(-1)
 		Expect(ok).To(BeTrue())
 		Expect(str).To(Equal(testStr))
+	})
+
+	It("can call a Go function", func() {
+		L.PushGoFunction(func(_ *moon.State) int {
+			L.PushBool(true)
+			return 1
+		})
+		L.SetGlobal("foo")
+		ok := L.DoString(`_ = foo() == true`)
+		Expect(ok).To(BeTrue())
 	})
 })
