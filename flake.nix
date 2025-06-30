@@ -11,55 +11,63 @@
       url = "github:nix-community/gomod2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
     { self, flakelight, ... }@inputs:
-    flakelight ./. {
-      inherit inputs;
-      withOverlays = [
-        inputs.gomod2nix.overlays.default
-      ];
+    flakelight ./. (
+      {
+        lib,
+        outputs,
+        ...
+      }:
+      {
+        inherit inputs;
+        withOverlays = [
+          inputs.gomod2nix.overlays.default
+        ];
 
-      devShell = {
-        packages =
-          pkgs: with pkgs; [
-            lua5_4
-            pkg-config
-            clang-tools
-            clang # fix stdlib not found on clangd
-            bear
-            go
-            gopls
-            gomod2nix
-          ];
-        stdenv = { clangStdenv, ... }: clangStdenv;
-      };
-
-      perSystem =
-        pkgs:
-        let
-          treefmt = (inputs.treefmt-nix.lib.evalModule pkgs ./nix/treefmt.nix);
-        in
-        {
-          formatter = treefmt.config.build.wrapper;
-          # disable for now
-          # checks.formatting = treefmt.config.build.check;
+        devShell = {
+          packages =
+            pkgs: with pkgs; [
+              lua5_4
+              pkg-config
+              clang-tools
+              clang # fix stdlib not found on clangd
+              treefmt
+              gofumpt
+              goimports-reviser
+              nixfmt-rfc-style
+              go
+              gopls
+              go-tools
+              gomod2nix
+            ];
+          stdenv = { clangStdenv, ... }: clangStdenv;
         };
 
-      # checks = pkgs:
-      # let
-      #   mkTestBin =
-      #     version:
+        checks = pkgs: {
+          lint = pkgs.stdenvNoCC.mkDerivation {
+            name = "lint";
+            src = ./.;
+            nativeBuildInputs = with pkgs; [
+              go
+              go-tools
+            ];
+            dontBuild = true;
+            doCheck = true;
+            checkPhase = ''
+              export GOCACHE=$PWD/go-build
+              export GOMODCACHE=$PWD/go/pkg/mod
+              for tag in lua5{1..4}; do
+                go vet -tags $tag
+                staticcheck -tags $tag -f stylish
+              done
+            '';
+          };
+        };
 
-      #     ;
-      # in
-      # {
-
-      # };
-    };
+        formatter = pkgs: pkgs.treefmt;
+      }
+    );
 }

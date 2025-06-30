@@ -1,5 +1,6 @@
 [language-server.gopls.config]
 buildFlags = ["-tags", "lua54"]
+"formatting.gofumpt" = true
 
 [[languages]]
 name = "c"

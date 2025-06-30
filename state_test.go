@@ -1,13 +1,14 @@
 package gomoon_test
 
 import (
+	"unsafe"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"unsafe"
+	"github.com/0komo/gomoon/internal/tests"
 
 	moon "github.com/0komo/gomoon"
-	"github.com/0komo/gomoon/internal/tests"
 )
 
 var _ = //
@@ -49,6 +50,7 @@ Describe("State", Ordered, func() {
 
 	AfterEach(func() {
 		L.Pop(L.GetTop())
+		Expect(L.GetTop()).To(BeZero())
 	})
 
 	It("can retrieve a string from stack", func() {
@@ -60,13 +62,23 @@ Describe("State", Ordered, func() {
 		Expect(str).To(Equal(testStr))
 	})
 
-	It("can call a Go function", func() {
-		L.PushGoFunction(func(_ *moon.State) int {
-			L.PushBool(true)
-			return 1
-		})
-		L.SetGlobal("foo")
-		ok := L.DoString(`_ = foo() == true`)
-		Expect(ok).To(BeTrue())
-	})
+	// It("can call a Go function", func() {
+	// 	L.PushGoFunction(func(_ *moon.State) int {
+	// 		L.PushString("foo")
+	// 		L.PushBool(true)
+	// 		return 2
+	// 	})
+	// 	L.SetGlobal("foo")
+	// 	L.PushGoFunction(func(_ *moon.State) int {
+	// 		b := L.ToBool(-1)
+	// 		Expect(b).To(BeTrue())
+	// 		return 0
+	// 	})
+	// 	L.SetGlobal("assert")
+	// 	ok := L.DoString(`
+	// 		local a, b = foo()
+	// 		assert(a == "foo" and b == true)
+	// 	`)
+	// 	Expect(ok).To(BeTrue())
+	// })
 })

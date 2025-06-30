@@ -9,7 +9,9 @@
 #include <lualib.h>
 #endif // _LUA_STATIC
 
-extern void *allocFnHandler(void *, void *, size_t, size_t);
-extern int goFuncHandler(lua_State *);
+extern void *gomoonAllocFnLayer(void *, void *, size_t, size_t);
+extern int gomoonCFnLayer(lua_State *);
+extern char *gomoonReaderFnLayer(lua_State *, void *, size_t *);
+extern int gomoonKFuncLayer(lua_State *, int, lua_KContext);
 
 #endif // GOMOON_UTILS_H

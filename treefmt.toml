@@ -1,0 +1,18 @@
+excludes = ["vendor/*"]
+
+[formatter.gofumpt]
+command = "gofumpt"
+options = ["-extra"]
+includes = ["*.go"]
+priority = 1
+
+[formatter.goimports-reviser]
+command = "goimports-reviser"
+options = ["-separate-named", "-set-alias"]
+includes = ["*.go"]
+priority = 2
+
+[formatter.nixfmt]
+command = "nixfmt"
+options = []
+includes = ["*.nix"]

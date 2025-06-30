@@ -2,7 +2,7 @@
 {
   projectRootFile = "flake.nix";
   programs = {
-    gofmt.enable = true;
+    gofumpt.enable = true;
     nixfmt.enable = true;
     shellcheck.enable = true;
   };
